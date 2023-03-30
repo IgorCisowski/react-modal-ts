@@ -3,6 +3,20 @@ import styled from "styled-components";
 import { ModalImg } from "./ModalImg";
 import { ModalContent } from "./ModalContent";
 import { ModalButtons } from "./ModalButtons";
+import { DarkMode } from "./DarkMode";
+import { Props } from "../types/type";
+import { Other } from "../types/type";
+
+const Wrapper = styled.div<Other>`
+  width: 100%;
+  height: 102vh;
+  background-color: ${({ darkMode }) => (darkMode ? "#1A1C23" : "#F2F3F5")};
+`;
+const ToggleButtonsWrapper = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 
 const OpenModal = styled.button`
   margin: 20px;
@@ -37,33 +51,30 @@ const StyledModal = styled.div<Props>`
   max-width: 800px;
   width: 100%;
   height: 300px;
-  // background-color: #23272f;
   transition: 0.3s ease-in-out;
 `;
 
-const XButton = styled.button`
+const XButton = styled.button<Other>`
   cursor: pointer;
   position: absolute;
-  right: 8px;
-  top: 1px;
+  right: 50px;
+  top: 10px;
   border: none;
   background-color: transparent;
-  color: white;
+  color: ${({ darkMode }) => (darkMode ? "white" : "black")};
   font-size: 20px;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<Other>`
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  background-color: #23272f;
+  border-radius: 0 20px 20px 0;
+  border: 1px solid grey;
+  background-color: ${({ darkMode }) => (darkMode ? "#23272" : "#ffffff")};
 `;
-
-export interface Props {
-  Modal: boolean;
-}
 
 export const Modal = () => {
   const [showModal, setShowModal] = useState<Props["Modal"]>(false);
@@ -72,23 +83,34 @@ export const Modal = () => {
     setShowModal(!showModal);
   };
 
-  useEffect(() => {
-    setTimeout(handleOpen, 2000);
-  }, []);
+  const [darkMode, setDarkMode] = useState<Other["darkMode"]>(false);
+
+  const handleMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // useEffect(() => {
+  //   setTimeout(handleOpen, 2000);
+  // }, []);
 
   return (
-    <>
-      <OpenModal onClick={handleOpen}>Open</OpenModal>
+    <Wrapper darkMode={darkMode}>
+      <ToggleButtonsWrapper>
+        <OpenModal onClick={handleOpen}>Open</OpenModal>
+        <DarkMode handleMode={handleMode} darkMode={darkMode} />
+      </ToggleButtonsWrapper>
       <ModalContainer Modal={showModal}>
         <StyledModal Modal={showModal}>
-          <XButton onClick={() => handleOpen()}>x</XButton>
+          <XButton onClick={() => handleOpen()} darkMode={darkMode}>
+            x
+          </XButton>
           <ModalImg />
-          <ContentWrapper>
-            <ModalContent />
+          <ContentWrapper darkMode={darkMode}>
+            <ModalContent darkMode={darkMode} />
             <ModalButtons handleOpen={handleOpen} />
           </ContentWrapper>
         </StyledModal>
       </ModalContainer>
-    </>
+    </Wrapper>
   );
 };

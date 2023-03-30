@@ -8,6 +8,8 @@ const ImgContainer = styled.div`
   background-image: url(${reacrImg});
   background-position: center;
   background-size: cover;
+  border-radius: 20px 0 0 20px;
+  border: 1px solid grey;
 `;
 
 export const ModalImg = () => {
