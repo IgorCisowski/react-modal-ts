@@ -112,8 +112,6 @@ export const Modal = () => {
       : (document.body.style.overflowY = "hidden");
   };
 
-  console.log(showModal);
-
   const [darkMode, setDarkMode] = useState<Other["darkMode"]>(false);
 
   const handleMode = () => {
