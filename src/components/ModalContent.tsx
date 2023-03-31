@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Other } from "../types/type";
+import { useTranslation } from "react-i18next";
 
 const Content = styled.div<Other>`
   display: flex;
@@ -26,11 +27,12 @@ const H2 = styled.h2<Other>`
 `;
 
 export const ModalContent = ({ darkMode }: any) => {
+  const { t } = useTranslation();
   return (
     <Content darkMode={darkMode}>
-      <FirstPara>Get your</FirstPara>
-      <H2 darkMode={darkMode}>£20 CREDIT</H2>
-      <SecondPara>For your first course</SecondPara>
+      <FirstPara>{t("FirstPara")}</FirstPara>
+      <H2 darkMode={darkMode}>{t("H2")}</H2>
+      <SecondPara>{t("SecondPara")}</SecondPara>
     </Content>
   );
 };
