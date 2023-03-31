@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -33,10 +34,11 @@ const NoButton = styled.button`
 `;
 
 export const ModalButtons = ({ handleOpen }: any) => {
+  const { t } = useTranslation();
   return (
     <ButtonWrapper>
-      <YesButton onClick={() => handleOpen()}>YES</YesButton>
-      <NoButton onClick={() => handleOpen()}>NO</NoButton>
+      <YesButton onClick={() => handleOpen()}>{t("yes")}</YesButton>
+      <NoButton onClick={() => handleOpen()}>{t("no")}</NoButton>
     </ButtonWrapper>
   );
 };
