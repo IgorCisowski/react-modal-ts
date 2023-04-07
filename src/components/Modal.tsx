@@ -107,10 +107,18 @@ export const Modal = () => {
 
   const handleOpen = () => {
     setShowModal(!showModal);
-    showModal
-      ? (document.body.style.overflowY = "visible")
-      : (document.body.style.overflowY = "hidden");
+    console.log(showModal);
+
+    // showModal
+    //   ? (document.body.style.overflowY = "visible")
+    //   : (document.body.style.overflowY = "hidden");
   };
+
+  useEffect(() => {
+    showModal
+      ? (document.body.style.overflowY = "hidden")
+      : (document.body.style.overflowY = "visible");
+  }, [showModal]);
 
   const [darkMode, setDarkMode] = useState<Other["darkMode"]>(false);
 
@@ -119,7 +127,7 @@ export const Modal = () => {
   };
 
   const handleClose = () => {
-    setShowModal(showModal === false);
+    setShowModal(false);
     document.body.style.overflowY = "visible";
   };
 
